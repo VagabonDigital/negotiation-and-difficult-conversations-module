@@ -1410,6 +1410,25 @@
       line-height: 1.45
     }
 
+    .challenge-detail {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(200, 132, 58, 0.22);
+    }
+
+    .challenge-card.active .challenge-detail {
+      display: block;
+    }
+
+    .challenge-detail .task {
+      font-size: 13px;
+      color: var(--amber);
+      font-weight: 700;
+      line-height: 1.55;
+      margin: 0;
+    }
+
     /* ── QUICK RECAP ────────────────────────────────────── */
     .quick-recap {
       background: var(--navy);
@@ -2255,28 +2274,6 @@
       flex-direction: column;
       align-items: center;
       gap: 12px
-    }
-
-    /* Challenge example box */
-    .challenge-example {
-      background: var(--bg);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px
-    }
-
-    .challenge-example p {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 4px
-    }
-
-    .challenge-example p:last-child {
-      margin-bottom: 0
-    }
-
-    .challenge-example .task {
-      color: var(--teal);
-      font-weight: 600
     }
 
     /* ── MOBILE FIRST ───────────────────────────────────────────
@@ -4336,11 +4333,13 @@
     <div class="page" id="page-15">
       <div class="page-eyebrow amber">Practice Upgrade</div>
       <h1 class="page-title">Difficult Conversation Challenge Bank</h1>
-      <p class="page-subtitle">Once the message is clear, try the same task with one extra difficulty. Add one challenge
-        at a time.</p>
+      <p class="page-subtitle">Once the response structure is clear, try the same prompt with one extra difficulty. Add
+        one challenge at a time.</p>
+      <p class="tap-hint">Tap any card to expand it.</p>
+
       <div class="challenge-grid mt-8">
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <circle cx="8" cy="8" r="5.5" stroke="#C8843A" stroke-width="1.3" />
               <path d="M8 5v3l2 1.5" stroke="#C8843A" stroke-width="1.3" stroke-linecap="round"
@@ -4348,9 +4347,12 @@
             </svg></div>
           <div class="challenge-title">Impatient Listener</div>
           <div class="challenge-quote">The other person wants a quick answer.</div>
+          <div class="challenge-detail">
+            <p class="task">Stay calm, use one control phrase, and avoid committing too quickly.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path
                 d="M6 8V4a1 1 0 0 1 2 0v4M6 8V6a1 1 0 0 0-2 0v3a5 5 0 0 0 5 5h1a4 4 0 0 0 4-4V8a1 1 0 0 0-2 0M6 8a1 1 0 0 1 2 0"
@@ -4358,9 +4360,12 @@
             </svg></div>
           <div class="challenge-title">Repeated Push</div>
           <div class="challenge-quote">The other person asks again after you set a boundary.</div>
+          <div class="challenge-detail">
+            <p class="task">Repeat the boundary calmly without adding unnecessary apology or new justification.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <circle cx="8" cy="8" r="5.5" stroke="#C8843A" stroke-width="1.3" />
               <path d="M6 6.5c0-1 .9-1.5 2-1.5s2 .7 2 1.5c0 1-1 1.5-2 2" stroke="#C8843A" stroke-width="1.3"
@@ -4369,9 +4374,12 @@
             </svg></div>
           <div class="challenge-title">Vague Pressure</div>
           <div class="challenge-quote">&#8220;We just need more flexibility.&#8221;</div>
+          <div class="challenge-detail">
+            <p class="task">Clarify what “flexibility” means before offering options or changing your position.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <circle cx="8" cy="6" r="3" stroke="#C8843A" stroke-width="1.3" fill="none" />
               <path d="M2.5 14c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="#C8843A" stroke-width="1.3" stroke-linecap="round"
@@ -4379,9 +4387,12 @@
             </svg></div>
           <div class="challenge-title">Senior Stakeholder</div>
           <div class="challenge-quote">The person has more authority than you.</div>
+          <div class="challenge-detail">
+            <p class="task">Sound respectful but still clear about the constraint, trade-off, or decision point.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5z" stroke="#C8843A" stroke-width="1.3"
                 fill="none" />
@@ -4390,18 +4401,24 @@
             </svg></div>
           <div class="challenge-title">Relationship Risk</div>
           <div class="challenge-quote">You need to protect the relationship while holding the point.</div>
+          <div class="challenge-detail">
+            <p class="task">Acknowledge the relationship, then state the boundary or trade-off clearly.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <rect x="2.5" y="3.5" width="11" height="9" rx="1.5" stroke="#C8843A" stroke-width="1.3" />
               <path d="M5 7h6M5 9.5h4" stroke="#C8843A" stroke-width="1.3" stroke-linecap="round" />
             </svg></div>
           <div class="challenge-title">Missing Information</div>
           <div class="challenge-quote">You do not have enough information to commit.</div>
+          <div class="challenge-detail">
+            <p class="task">Avoid guessing. Confirm what you can say now and what needs checking before commitment.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 5h10M3 8h7M3 11h4" stroke="#C8843A" stroke-width="1.3" stroke-linecap="round" />
               <path d="M13 10l2 2-2 2" stroke="#C8843A" stroke-width="1.3" stroke-linecap="round"
@@ -4409,9 +4426,13 @@
             </svg></div>
           <div class="challenge-title">Scope Creep</div>
           <div class="challenge-quote">The request adds work without changing time or budget.</div>
+          <div class="challenge-detail">
+            <p class="task">Separate the new request from the original agreement and explain the impact on scope,
+              timing, or budget.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M8 3a5 5 0 1 0 0 10A5 5 0 0 0 8 3z" stroke="#C8843A" stroke-width="1.3" fill="none" />
               <path d="M8 6v2.5" stroke="#C8843A" stroke-width="1.5" stroke-linecap="round" />
@@ -4419,9 +4440,12 @@
             </svg></div>
           <div class="challenge-title">Emotional Tone</div>
           <div class="challenge-quote">The other person sounds frustrated or disappointed.</div>
+          <div class="challenge-detail">
+            <p class="task">Acknowledge the emotion without absorbing blame, then return to the practical issue.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <rect x="2" y="5" width="12" height="8" rx="1.5" stroke="#C8843A" stroke-width="1.3" />
               <path d="M5 5V4a3 3 0 0 1 6 0v1" stroke="#C8843A" stroke-width="1.3" />
@@ -4429,31 +4453,32 @@
             </svg></div>
           <div class="challenge-title">Short Answer</div>
           <div class="challenge-quote">You have 30 seconds to respond clearly.</div>
+          <div class="challenge-detail">
+            <p class="task">Give one calm position, one reason, and one next step. Do not over-explain.</p>
+          </div>
         </div>
 
-        <div class="challenge-card" onclick="this.classList.toggle('active')">
+        <div class="challenge-card" onclick="toggleChallengeCard(this)">
           <div class="challenge-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 2h10v12l-5-3-5 3V2z" stroke="#C8843A" stroke-width="1.3" stroke-linecap="round"
                 stroke-linejoin="round" fill="none" />
             </svg></div>
           <div class="challenge-title">Written Version</div>
           <div class="challenge-quote">The response needs to work as a short email after the conversation.</div>
+          <div class="challenge-detail">
+            <p class="task">Turn the spoken response into a short written follow-up with the issue, boundary, and next
+              step.</p>
+          </div>
         </div>
 
       </div>
+
       <div class="card mt-20">
         <div class="section-label mb-8">How to use these</div>
-        <p style="font-size:14px;color:var(--navy);line-height:1.65;margin-bottom:12px">Choose one prompt from the
-          Practice Prompt Library and one challenge from this page. Practise using one skill or the full framework.</p>
-        <div class="challenge-example">
-          <p><strong>Situation:</strong> &#8220;We need this two weeks earlier.&#8221;</p>
-          <p><strong>Challenge:</strong> The listener sounds impatient and interrupts: &#8220;I don&#8217;t need the
-            full explanation.&#8221;</p>
-          <p class="task">Task: Stay calm. Use one control phrase and keep it short.</p>
-        </div>
-        <p style="font-size:13px;color:var(--muted);margin-top:12px;font-style:italic">Rule: add one challenge at a
-          time. The goal is not to win the conversation. The goal is to stay clear and professional when tension rises.
-        </p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65">Choose one prompt from the Practice Prompts page
+          and one challenge from this page. Practise using one skill or the full framework. Add one challenge at a time.
+          The goal is not to win the conversation. The goal is to stay calm, clear, useful, and professional when
+          tension rises.</p>
       </div>
     </div>
 
@@ -5221,6 +5246,18 @@
 
     function toggleFullExample(toggle) {
       toggle.classList.toggle('open');
+    }
+
+    function toggleChallengeCard(card) {
+      const wasActive = card.classList.contains('active');
+
+      document.querySelectorAll('.challenge-card').forEach(function (c) {
+        c.classList.remove('active');
+      });
+
+      if (!wasActive) {
+        card.classList.add('active');
+      }
     }
 
     // Close jump panel on Escape
